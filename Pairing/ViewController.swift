@@ -20,12 +20,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     var groups = [[String]]()
     
-    let scroll: UIScrollView = {
-       let s = UIScrollView()
-        
-        return s
-    }()
-    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
