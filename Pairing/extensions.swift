@@ -55,7 +55,7 @@ extension ViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     }
     
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControlState) -> NSAttributedString? {
-        let str = "Add new name"
+        let str = "Add New"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.callout)]
         return NSAttributedString(string: str, attributes: attrs)
     }

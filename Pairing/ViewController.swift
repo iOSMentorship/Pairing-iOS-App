@@ -67,11 +67,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     
     func addNew(){
-        let alertController = UIAlertController(title: "", message: "Please input name:", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "", message: "INPUT:", preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
             if let field = alertController.textFields![0] as? UITextField {
-                // store your data
                 self.testArr.append(field.text!)
                 self.collectionView.reloadData()
             } else {
@@ -254,10 +253,9 @@ class HeaderView: UICollectionViewCell,UITextFieldDelegate {
     }()
     let button: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Get Groups", for: .normal)
+        btn.setTitle("Pair!!!!", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-//        btn.backgroundColor = UIColor(red:0.21, green:0.79, blue:0.69, alpha:1.0)
-        btn.backgroundColor = .randomColor()
+        btn.backgroundColor = UIColor(red:0.21, green:0.79, blue:0.69, alpha:1.0)
         return btn
     }()
    override init(frame: CGRect) {
