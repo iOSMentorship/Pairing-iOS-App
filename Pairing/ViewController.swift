@@ -34,7 +34,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }()
 
     var testArr = [String]()
-    
+    var shuffledArr = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,22 +102,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         let index = nameText.index(nameText.startIndex, offsetBy: 0)
         cell.viewText.text = "\(nameText[index])"
         cell.superv.backgroundColor = .randomColor()
-        
-        print(groups)
-        
+        shuffledArr = testArr.shuffled()
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer", for: indexPath)  as! HeaderView
         footer.contoller = self
         footer.d = self
-//        footer.ffff()
         footer.button.addTarget(self, action: "gen", for: .touchUpInside)
         return footer
-        
-    }
-    
-    func gen(){
         
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -275,28 +268,23 @@ class HeaderView: UICollectionViewCell,UITextFieldDelegate {
     func groupEm(){
         print("Number of items we currently have is \(contoller?.testArr.count) number of groups is \(groupTextField.text)")
         if groupTextField.text != "" {
-            contoller?.testArr.shuffle()
+
             var g = Int(groupTextField.text!)
-            if g! % 2 == 0 {
-                print("Even")
-            }else{
-                print("ODD")
-            }
-            if (contoller?.testArr.count)! != 0 && (contoller?.testArr.count)! > 1{
-                if (contoller?.testArr.count)! % 2 != 0 && g! % 2 != 0{
+            if (contoller?.shuffledArr.count)! != 0 && (contoller?.shuffledArr.count)! > 1{
+                if (contoller?.shuffledArr.count)! % 2 != 0 && g! % 2 != 0{
                     contoller?.showAlert()
                 }else{
-                    var group : [[String]] = Array(repeating: [], count: (contoller?.testArr.count)! / 2)
+                    
+                    var group : [[String]] = Array(repeating: [], count: (contoller?.shuffledArr.count)! / 2)
                     var next = 0
-                    for ix in stride(from: 0, to: (contoller?.testArr.count)! - 1, by: g!){
+                    for ix in stride(from: 0, to: (contoller?.shuffledArr.count)! - 1, by: g!){
                         for ixx in 0..<g!{
-                            group[next].append((contoller?.testArr[ix+ixx])!)
+                            group[next].append((contoller?.shuffledArr[ix+ixx])!)
                         }
                         next += 1
                     }
                     contoller?.groups = group
                     contoller?.collectionView.reloadData()
-//                    print(group)
                     if contoller?.groups.count != 0{
                         contoller?.nav()
                     }

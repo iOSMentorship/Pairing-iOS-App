@@ -17,6 +17,7 @@ class secondVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         return table
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -24,6 +25,7 @@ class secondVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         tableView.dataSource = self
         tableView.register(TableCell.self, forCellReuseIdentifier: "tablecell")
         view.addSubview(tableView)
+        
         view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
         view.addConstraintsWithFormat("V:|[v0]|", views: tableView)
         tableView.tableFooterView = UIView()

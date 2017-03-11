@@ -36,17 +36,43 @@ extension UIColor {
                        alpha: 1.0)
     }
 }
-extension Array
-{
-    mutating func shuffle()
-    {
-        for _ in 0..<10
-        {
-            sort { (_,_) in arc4random() < arc4random() }
+extension MutableCollection where Indices.Iterator.Element == Index {
+    /// Shuffles the contents of this collection.
+    mutating func shuffle() {
+        let c = count
+        guard c > 1 else { return }
+        
+        for (firstUnshuffled , unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
+            let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
+            guard d != 0 else { continue }
+            let i = index(firstUnshuffled, offsetBy: d)
+            swap(&self[firstUnshuffled], &self[i])
         }
     }
 }
-
+extension Array {
+    
+    func shuffled() -> Array<Element> {
+        var indexArray = Array<Int>(indices)
+        var index = indexArray.endIndex
+        
+        let indexIterator = AnyIterator<Int> {
+            guard let nextIndex = indexArray.index(index, offsetBy: -1, limitedBy: indexArray.startIndex)
+                else { return nil }
+            
+            index = nextIndex
+            let randomIndex = Int(arc4random_uniform(UInt32(index)))
+            if randomIndex != index {
+                swap(&indexArray[randomIndex], &indexArray[index])
+            }
+            
+            return indexArray[index]
+        }
+        
+        return indexIterator.map { self[$0] }
+    }
+    
+}
 extension ViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let str = "Yikes!!! this place is empty :("
