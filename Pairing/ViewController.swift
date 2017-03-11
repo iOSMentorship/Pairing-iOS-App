@@ -113,6 +113,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         return footer
         
     }
+    
+    func gen(){
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
         
@@ -278,6 +282,7 @@ class HeaderView: UICollectionViewCell,UITextFieldDelegate {
                     var group : [[String]] = Array(repeating: [], count: (contoller?.shuffledArr.count)! / 2)
                     var next = 0
                     for ix in stride(from: 0, to: (contoller?.shuffledArr.count)! - 1, by: g!){
+                        print(ix)
                         for ixx in 0..<g!{
                             group[next].append((contoller?.shuffledArr[ix+ixx])!)
                         }
