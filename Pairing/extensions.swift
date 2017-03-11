@@ -50,8 +50,14 @@ extension MutableCollection where Indices.Iterator.Element == Index {
         }
     }
 }
+//ARRAY EXTENSION :)
 extension Array {
-    
+    func chunked(by chunkSize:Int) -> [[Element]] {
+        let groups = stride(from: 0, to: self.count, by: chunkSize).map {
+            Array(self[$0..<[$0 + chunkSize, self.count].min()!])
+        }
+        return groups
+    }
     func shuffled() -> Array<Element> {
         var indexArray = Array<Int>(indices)
         var index = indexArray.endIndex
@@ -71,8 +77,10 @@ extension Array {
         
         return indexIterator.map { self[$0] }
     }
-    
+
 }
+
+
 extension ViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let str = "Yikes!!! this place is empty :("

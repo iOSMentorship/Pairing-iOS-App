@@ -275,24 +275,12 @@ class HeaderView: UICollectionViewCell,UITextFieldDelegate {
 
             var g = Int(groupTextField.text!)
             if (contoller?.shuffledArr.count)! != 0 && (contoller?.shuffledArr.count)! > 1{
-                if (contoller?.shuffledArr.count)! % 2 != 0 && g! % 2 != 0{
-                    contoller?.showAlert()
-                }else{
-                    
-                    var group : [[String]] = Array(repeating: [], count: (contoller?.shuffledArr.count)! / 2)
-                    var next = 0
-                    for ix in stride(from: 0, to: (contoller?.shuffledArr.count)! - 1, by: g!){
-                        print(ix)
-                        for ixx in 0..<g!{
-                            group[next].append((contoller?.shuffledArr[ix+ixx])!)
-                        }
-                        next += 1
-                    }
-                    contoller?.groups = group
+                
+                    var group = contoller?.shuffledArr.chunked(by: g!)
+                    contoller?.groups = group!
                     contoller?.collectionView.reloadData()
                     if contoller?.groups.count != 0{
                         contoller?.nav()
-                    }
                     
                 }
             }
